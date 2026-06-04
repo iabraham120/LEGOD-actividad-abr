@@ -52,12 +52,40 @@ if (isset($_GET['busqueda'])) {
     </div>
 
     <div class="contenedor-resultados">
-        <!-- PHP --> 
-        <h3>Resultados para la palabra: <?php ?></h3>
+        <h3>Resultados para la palabra: <?php echo $texto_buscado; ?></h3>
 
-        <!-- PHP --> 
         <?php
-        
+        if (count($lista_resultados) > 0) {
+            foreach ($lista_resultados as $set_lego) {
+                echo "<div class='tarjeta'>";
+                echo "<h3>" . $set_lego['name'] . "</h3>";
+                echo "<p><strong>Año de lanzamiento:</strong> " . $set_lego['year'] . "</p>";
+                echo "<p><strong>Cantidad de piezas:</strong> " . $set_lego['num_parts'] . "</p>";
+                
+                if (isset($set_lego['theme_name'])) {
+                    echo "<p><span class='etiqueta-tema'>Tema: " . $set_lego['theme_name'] . "</span></p>";
+                }
+                
+                // CONTENEDOR DE ACCIONES (EDITAR Y ELIMINAR)
+                echo "<div class='acciones-tarjeta'>";
+                
+                // Botón Editar (por método GET mediante un enlace)
+                echo "<a href='actualiza.php?id_set=" . $set_lego['set_num'] . "' class='btn-editar'>Editar Set</a>";
+                
+                // Botón Eliminar (por método POST mediante un formulario)
+                echo "<form action='elimina.php' method='POST' style='display:inline;'>";
+                echo "<input type='hidden' name='set_a_eliminar' value='" . $set_lego['set_num'] . "'>";
+                echo "<button type='submit' class='btn-eliminar'>Eliminar Set</button>";
+                echo "</form>";
+                
+                echo "</div>";
+                echo "</div>";
+            }
+        } else {
+            echo "<div class='tarjeta'>";
+            echo "<p>No se encontraron sets con ese nombre.</p>";
+            echo "</div>";
+        }
         ?>
     </div>
 
