@@ -33,6 +33,7 @@ if (isset($_GET['busqueda'])) {
             
             $lista_resultados[] = $fila;
         }
+        //var_dump($lista_resultados);
     }
 }
 ?>
