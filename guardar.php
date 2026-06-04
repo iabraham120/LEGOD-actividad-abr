@@ -10,8 +10,8 @@
         $num_parts = $_POST["num_parts"];
         $theme_id = $_POST["theme_id"];
 
-        $sql = "INSERT INTO sets (set_num, name, year, theme__id, num_parts) #nombre de columnas
-                VALUES($set_num, $name, $year, $theme_id, $num_parts)"; #variables
+        $sql = "INSERT INTO sets (set_num, name, year, theme_id, num_parts) 
+                VALUES('$set_num', '$name', $year, $theme_id, $num_parts)"; 
         $query = mysqli_query($conexion, $sql);
         if($query){
             $mensaje = "FUE UN EXITO";
@@ -43,10 +43,9 @@
     </div>
 
     <!-- PHP --> 
-    <div class="mensaje <?php  ?>">
+     <div class="mensaje <?php echo $clase_mensaje; ?>">
         <h3>Resultado de la inserción:</h3>
-        <!-- PHP --> 
-        <p><?php  ?></p>
+        <p><?php echo $mensaje; ?></p>
         <br>
         <a href="crear.php" style="color: #000; font-weight:bold;">Añadir otro set</a> | 
         <a href="index.html" style="color: #000; font-weight:bold;">Ir al buscador</a>
